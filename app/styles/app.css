@@ -24,7 +24,7 @@
     border-bottom: 2px solid var(--navitem-link-color);
 }
 
-.rr-navbar-item > a:active {
+.rr-navbar-item > a.active {
     color: inherit;
     border-bottom: 2px solid var(--navitem-link-color);
 }
