@@ -5,8 +5,12 @@ import { A } from '@ember/array';
 
 let Band = EmberObject.extend({
     name: '',
+    language: '',
     slug: computed('name', function() {
         return dasherize(this.name);
+    }),
+    site: computed('slug', 'language', function() {
+        return `https://bands.com/${this.slug}.${this.language}`;
     })
 });
 
