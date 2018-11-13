@@ -16,7 +16,8 @@ export default Controller.extend({
             this.set('isAddingBand', false);
         },
 
-        saveBand() {
+        saveBand(e) {
+            e.preventDefault();
             let newBand = Band.create({ name: this.newBandName });
             this.model.pushObject(newBand);
             this.set('newBandName', '');
