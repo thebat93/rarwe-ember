@@ -5,7 +5,25 @@
     </li>
     {{else}}
     <li class="rr-empty-message">
-        No {{model.name}} songs yet.
+        No {{model.name}} songs yet, why don't you <a href="#" onclick={{action "addSong"}}>create one?</a>
     </li>
     {{/each}}
+    <div class="rr-new-label">
+        {{#if isAddingSong}}
+        <form class="rr-inline-form" onsubmit={{action "saveSong"}}>
+            {{input type="text" class="rr-input" value=newSongName placeholder="New Song"}}
+            <div class="rr-inline-form-group ml-auto">
+                <button type="submit" class="rr-action-button" disabled={{isAddButtonDisabled}}>Add</button>
+                <span class="rr-cancel-icon" onclick={{action "cancelAddSong"}}>
+                    {{fa-icon "times"}}
+                </span>
+            </div>
+        </form>
+        {{else}}
+        <label onclick={{action "addSong"}}>
+            {{fa-icon "plus"}}
+            <span class="ml1">Add new song</span>
+        </label>
+        {{/if}}
+    </div>
 </ul>
