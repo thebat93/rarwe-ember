@@ -11,6 +11,20 @@
         </li>
         {{/each}}
     </ul>
+    <div class="rr-new-label">
+        {{#if isAddingBand}}
+            {{input type="text" class="rr-input" value=newBandName placeholder="New Band" }}
+            <button type="button" class="rr-action-button" onclick={{action "saveBand"}}>Add</button>
+            <span class="rr-cancel-icon" onclick={{action "cancelAddBand"}}>
+                {{fa-icon "times"}}
+            </span>
+        {{else}}
+            <label onclick={{action "addBand"}}>
+                {{fa-icon "plus"}}
+                <span class="ml1">Add new band</span>
+            </label>
+        {{/if}}
+    </div>
 </div>
 <div class="rr-main-panel">
     {{outlet}}
