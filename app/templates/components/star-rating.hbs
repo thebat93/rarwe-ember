@@ -1,9 +1,13 @@
-{{#each starts as |star|}}
-    <span class="rating-star">
-        {{#if star.isFull}}
-            {{fa-icon 'star'}}
-        {{else}}
-            {{fa-icon 'star-o'}}
-        {{/if}}
-    </span>
-{{/each}}
+{{#if hasBlock}}
+    {{yield stars}}
+{{else}}
+    {{#each starts as |star|}}
+        <span class="rating-star">
+            {{#if star.isFull}}
+                {{fa-icon 'star'}}
+            {{else}}
+                {{fa-icon 'star-o'}}
+            {{/if}}
+        </span>
+    {{/each}}
+{{/if}}
