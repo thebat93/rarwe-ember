@@ -162,3 +162,7 @@ a {
     display: flex;
     justify-content: space-between;
 }
+
+.rating-panel > .rating-star {
+    cursor: pointer;
+}
