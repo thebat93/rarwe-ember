@@ -1,8 +1,8 @@
 {{#if hasBlock}}
     {{yield stars}}
 {{else}}
-    {{#each starts as |star|}}
-        <span class="rating-star">
+    {{#each stars as |star|}}
+        <span class="rating-star" onclick={{action "setRating" star.rating}}>
             {{#if star.isFull}}
                 {{fa-icon 'star'}}
             {{else}}

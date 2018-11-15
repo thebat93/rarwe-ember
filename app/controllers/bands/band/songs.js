@@ -21,6 +21,11 @@ export default Controller.extend({
             let newSong = Song.create({ title: this.newSongName });
             this.model.songs.pushObject(newSong);
             this.set('newSongName', '');
+        },
+        // обновить рейтинг
+        updateRating(params) {
+            let { item: song, rating } = params;
+            song.set('rating', rating);
         }
     }
 });

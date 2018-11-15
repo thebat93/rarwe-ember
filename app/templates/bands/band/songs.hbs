@@ -2,7 +2,7 @@
     {{#each model.songs as |song|}}
     <li class="rr-list-item">
         {{song.title}}
-        {{star-rating class="fr" rating=song.rating}}
+        {{star-rating class="fr" rating=song.rating item=song onClick=(action 'updateRating')}}
     </li>
     {{else}}
     <li class="rr-empty-message">

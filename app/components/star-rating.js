@@ -10,6 +10,10 @@ export default Component.extend({
     rating: 0,
     // максимальное значение рейтинга
     maxRating: 5,
+    // для какой сущности устанавливать рейтинг
+    item: null,
+    // обработчик клика на звезду
+    onClick() {},
     // вычисляемое свойство: зависит от rating и maxRating
     stars: computed('rating', 'maxRating', function() {
         let stars = [];
@@ -21,5 +25,14 @@ export default Component.extend({
             });
         }
         return stars;
-    })
+    }),
+    actions: {
+        // устанавливает новый рейтинг по клику пользователя
+        setRating(newRating) {
+            return this.onClick({
+                item: this.item,
+                rating: newRating
+            });
+        }
+    }
 });
