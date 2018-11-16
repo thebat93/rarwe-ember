@@ -23,8 +23,7 @@ export default Controller.extend({
             this.set('newSongName', '');
         },
         // обновить рейтинг
-        updateRating(params) {
-            let { item: song, rating } = params;
+        updateRating(song, rating) {
             song.set('rating', rating);
         }
     }

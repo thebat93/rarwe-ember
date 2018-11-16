@@ -10,8 +10,6 @@ export default Component.extend({
     rating: 0,
     // максимальное значение рейтинга
     maxRating: 5,
-    // для какой сущности устанавливать рейтинг
-    item: null,
     // обработчик клика на звезду
     onClick() {},
     // вычисляемое свойство: зависит от rating и maxRating
@@ -29,10 +27,7 @@ export default Component.extend({
     actions: {
         // устанавливает новый рейтинг по клику пользователя
         setRating(newRating) {
-            return this.onClick({
-                item: this.item,
-                rating: newRating
-            });
+            return this.onClick(newRating);
         }
     }
 });
