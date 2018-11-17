@@ -107,11 +107,6 @@ a {
     border-bottom: 1px solid;
 }
 
-.rr-page-header > .rr-app-title {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
 .rr-page-header > .rr-app-subtitle {
     font-weight: normal;    
 }
@@ -165,4 +160,20 @@ a {
 
 .rating-panel > .rating-star {
     cursor: pointer;
+}
+
+.rr-header-link > .rr-app-title {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.rr-panel {
+    padding: 1rem;
+    border: .125rem solid;
+    border-radius: .125rem;
+}
+
+.rr-textarea {
+    width: 100%;
+    padding: .5rem;
 }
