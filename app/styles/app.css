@@ -65,13 +65,13 @@
     text-align: center;
 }
 
-.rr-band-link > .rr-ponter {
+.rr-band-link > .rr-pointer {
     margin-left: 5px;
     display: none;
 }
 
-.rr-band-link.active > .rr-ponter {
-    display: block;
+.rr-band-link.active > .rr-pointer {
+    display: inline-block;
 }
 
 a {

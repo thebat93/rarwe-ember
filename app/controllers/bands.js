@@ -34,7 +34,7 @@ export default Controller.extend({
                 isAddingBand: false
             });
             // переходим по роуту с band = newBand
-            this.transitionToRoute('bands.band.songs', newBand);
+            this.transitionToRoute('bands.band.songs', newBand.slug);
         }
     }
 });
