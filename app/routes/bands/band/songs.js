@@ -8,7 +8,17 @@ export default Route.extend({
             newSongName: ''
         });
     },
+
+
     model() {
         return this.modelFor('bands.band')
+    },
+
+    actions: {
+        // экшен, который срабатывает когда переход закончен
+        didTransition() {
+            let band = this.modelFor('bands.band');
+            document.title = `${band.name} - Rock & Roll`;
+        }
     }
 });
