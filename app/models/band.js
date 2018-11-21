@@ -1,6 +1,6 @@
 import DS from 'ember-data';
-import { computed } from '@ember/object';
-import { dasherize } from '@ember/string'
+// import { computed } from '@ember/object';
+// import { dasherize } from '@ember/string'
 
 const { Model, attr, hasMany } = DS;
 
@@ -24,7 +24,7 @@ export default Model.extend({
     // можно не указывать тип, тогда булет использоваться название ключа
     songs: hasMany(/*'song'*/),
 
-    slug: computed('name', function() {
-        return dasherize(this.name);
-    })
+    // slug: computed('name', function() {
+    //     return dasherize(this.name);
+    // })
 });

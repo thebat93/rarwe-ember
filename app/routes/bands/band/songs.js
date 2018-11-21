@@ -9,9 +9,8 @@ export default Route.extend({
         });
     },
 
-
     model() {
-        return this.modelFor('bands.band')
+        return this.modelFor('bands.band');
     },
 
     actions: {

@@ -7,7 +7,7 @@ export default Model.extend({
     // band: null,
     // rating: 0
 
-    titile: attr('string'),
+    title: attr('string'),
     rating: attr('number'),
     band: belongsTo()
 });
