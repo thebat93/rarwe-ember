@@ -1,30 +1,38 @@
 <ul class="rr-list">
-    {{#each model.songs as |song|}}
+  {{#each model.songs as |song|}}
     <li class="rr-list-item">
-        {{song.title}}
-        {{star-rating class="fr" rating=song.rating onClick=(action 'updateRating' song)}}
+      {{song.title}}
+      {{star-rating
+        class="fr"
+        rating=song.rating
+        onClick=(action "updateRating" song)
+      }}
     </li>
-    {{else}}
+  {{else}}
     <li class="rr-empty-message">
-        No {{model.name}} songs yet, why don't you <a href="#" onclick={{action "addSong"}}>create one?</a>
+      No {{model.name}} songs yet, why don't you <a href="#" onclick={{action "addSong"}}>create one?</a>
     </li>
-    {{/each}}
-    <div class="rr-new-label">
-        {{#if isAddingSong}}
-        <form class="rr-inline-form" onsubmit={{action "saveSong"}}>
-            {{input type="text" class="rr-input" value=newSongName placeholder="New Song"}}
-            <div class="rr-inline-form-group ml-auto">
-                <button type="submit" class="rr-action-button" disabled={{isAddButtonDisabled}}>Add</button>
-                <span class="rr-cancel-icon" onclick={{action "cancelAddSong"}}>
-                    {{fa-icon "times"}}
-                </span>
-            </div>
-        </form>
-        {{else}}
-        <label onclick={{action "addSong"}}>
-            {{fa-icon "plus"}}
-            <span class="ml1">Add new song</span>
-        </label>
-        {{/if}}
-    </div>
+  {{/each}}
+  <div class="rr-new-label">
+    {{#if isAddingSong}}
+      <form class="rr-inline-form" onsubmit={{action "saveSong"}}>
+        {{input type="text" class="rr-input" value=newSongName placeholder="New Song"}}
+        <div class="rr-inline-form-group ml-auto">
+          <button type="submit" class="rr-action-button" disabled={{isAddButtonDisabled}}>Add</button>
+          <span
+            class="rr-cancel-icon"
+            role="button"
+            onclick={{action "cancelAddSong"}}
+          >
+            {{fa-icon "times"}}
+          </span>
+        </div>
+      </form>
+    {{else}}
+      <label onclick={{action "addSong"}}>
+        {{fa-icon "plus"}}
+        <span class="ml1">Add new song</span>
+      </label>
+    {{/if}}
+  </div>
 </ul>
