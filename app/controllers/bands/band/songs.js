@@ -35,7 +35,11 @@ export default Controller.extend({
 
         // обновить рейтинг
         updateRating(song, rating) {
+            // обновляем свойство модели
             song.set('rating', song.rating === rating ? 0 : rating);
+
+            // PATCH-запрос на обновление рейтинга
+            return song.save();
         }
     }
 });
