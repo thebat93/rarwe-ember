@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import Song from 'rarwe/models/song';
+// import Song from 'rarwe/models/song';
 import { empty } from '@ember/object/computed';
 
 export default Controller.extend({
@@ -8,20 +8,31 @@ export default Controller.extend({
     isAddButtonDisabled: empty('newSongName'),
 
     actions: {
+        // добавить новую песню
         addSong() {
             this.set('isAddingSong', true);
         },
 
+        //отменить добавление новой песни
         cancelAddSong() {
             this.set('isAddingSong', false);
         },
 
-        saveSong(e) {
+        // сохранить новую песню
+        async saveSong(e) {
             e.preventDefault();
-            let newSong = Song.create({ title: this.newSongName });
-            this.model.songs.pushObject(newSong);
+            // создать новую запись в сторе
+            let newSong = this.get('store').createRecord('song', {
+                title: this.get('newSongName'),
+                // связь с группой
+                band: this.model
+            });
+            // POST-запрос
+            await newSong.save();
+            // обнуляем название новой песни
             this.set('newSongName', '');
         },
+
         // обновить рейтинг
         updateRating(song, rating) {
             song.set('rating', song.rating === rating ? 0 : rating);

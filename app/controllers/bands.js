@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import Band from 'rarwe/models/band';
+// import Band from 'rarwe/models/band';
 // хелпер который возвращает true если переданное свойство пустое
 import { empty } from '@ember/object/computed';
 
@@ -21,20 +21,29 @@ export default Controller.extend({
             this.set('isAddingBand', false);
         },
         // сохранить новую группу
-        saveBand(e) {
+        async saveBand(e) {
             // запрещаем отправку формы по дефолту
             e.preventDefault();
+
             // создаем новую группу на основе модели
-            let newBand = Band.create({ name: this.newBandName });
-            // добавляем новую группу в свойство model
-            this.model.pushObject(newBand);
+            // let newBand = Band.create({ name: this.newBandName });
+            // // добавляем новую группу в свойство model
+            // this.model.pushObject(newBand);
+
+            // создаем запись в сторе
+            let newBand = this.store.createRecord('band', { name: this.newBandName });
+
+            // сохраняем (POST запрос)
+            await newBand.save();
+
             // обнуляем ввод и возвращаем в изначальное состояние
             this.setProperties({
                 newBandName: '',
                 isAddingBand: false
             });
-            // переходим по роуту с band = newBand
-            this.transitionToRoute('bands.band.songs', newBand.slug);
+
+            // переходим по роуту с band = newBand.id
+            this.transitionToRoute('bands.band.songs', newBand.id);
         }
     }
 });
