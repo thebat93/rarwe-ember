@@ -13,23 +13,21 @@ module('Acceptance | Bands', function(hooks) {
     
     await visit('/');
     
-    let bandLinks = document.querySelectorAll('.rr-band-link');
-    assert.equal(bandLinks.length, 2, 'All band links are rendered');
-    assert.ok(bandLinks[0].textContent.includes('Radiohead'), 'First band link contains the band name');
-    assert.ok(bandLinks[1].textContent.includes('Long Distance Calling'), 'The other band link contains the band name');
+    assert.dom('[data-test-rr=band-link]').exists({ count: 2}, 'All band links are rendered');
+    assert.dom('[data-test-rr=band-list-item]:first-child').hasText('Radiohead', 'First band link contains the band name');
+    assert.dom('[data-test-rr=band-list-item]:last-child').hasText('Long Distance Calling', 'The other band link contains the band name');
   });
 
   test('Create a band', async function(assert) {
     this.server.create('band', { name: 'Royal Blood' });
     
     await visit('/');
-    await click('label');
-    await fillIn('.rr-input', 'Caspian');
-    await click('.rr-action-button');
+    await click('[data-test-rr=new-band-label]');
+    await fillIn('[data-test-rr=new-band-input]', 'Caspian');
+    await click('[data-test-rr=new-band-button]');
     
-    let bandLinks = document.querySelectorAll('.rr-band-link');
-    assert.equal(bandLinks.length, 2, 'All band links are rendered', 'A new band link is rendered');
-    assert.ok(bandLinks[1].textContent.includes('Caspian'), 'The new band link is rendered as the last item');
-    assert.ok(document.querySelector('.rr-navbar-item > .active').textContent.includes('Songs'), 'The songs tab is active');
+    assert.dom('[data-test-rr=band-list-item]').exists({ count: 2 }, 'A new band link is rendered');
+    assert.dom('[data-test-rr=band-list-item]:last-child').hasText('Caspian', 'The new band link is rendered as the last item');
+    assert.dom('[data-test-rr=songs-nav-item] > .active').hasText('Songs', 'The Songs tab is active');
   });
 });
