@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
-import { visit, click, fillIn } from '@ember/test-helpers';
+import { visit, click } from '@ember/test-helpers';
+import { createBand, createSong } from 'rarwe/tests/helpers/custom-helpers'
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
 
@@ -22,12 +23,25 @@ module('Acceptance | Bands', function(hooks) {
     this.server.create('band', { name: 'Royal Blood' });
     
     await visit('/');
-    await click('[data-test-rr=new-band-label]');
-    await fillIn('[data-test-rr=new-band-input]', 'Caspian');
-    await click('[data-test-rr=new-band-button]');
+    await createBand('Caspian');
     
     assert.dom('[data-test-rr=band-list-item]').exists({ count: 2 }, 'A new band link is rendered');
     assert.dom('[data-test-rr=band-list-item]:last-child').hasText('Caspian', 'The new band link is rendered as the last item');
     assert.dom('[data-test-rr=songs-nav-item] > .active').hasText('Songs', 'The Songs tab is active');
+  });
+
+  test('Create a song', async function(assert) {
+    this.server.create('band', { name: 'Green Day' });
+    
+    await visit('/');
+    await click('[data-test-rr=band-link]:first-child');
+
+    assert.dom('[data-test-rr=song-list-item]').exists({ count: 0 }, 'No song links are rendered');
+    assert.dom('[data-test-rr=songs-nav-item] > .active').hasText('Songs', 'The Songs tab is active');
+
+    await createSong('American Idiot');
+
+    assert.dom('[data-test-rr=song-list-item]').exists({ count: 1 }, 'The new song link is rendered');
+    assert.dom('[data-test-rr=song-list-item]:first-child').hasText('American Idiot', 'The new song link is rendered as the first item');
   });
 });
