@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-// import Song from 'rarwe/models/song';
 import { empty } from '@ember/object/computed';
 
 export default Controller.extend({
