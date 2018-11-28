@@ -6,7 +6,7 @@
       class="rating-star"
       role="button"
       onclick={{action "setRating" star.rating}}
-      data-test-rr={{concat "star-rating" star.rating}}
+      data-test-rr={{concat "star-rating-" star.rating}}
     >
       {{#if star.isFull}}
         {{fa-icon "star"}}
