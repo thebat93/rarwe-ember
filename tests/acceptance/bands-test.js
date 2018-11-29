@@ -44,4 +44,18 @@ module('Acceptance | Bands', function(hooks) {
     assert.dom('[data-test-rr=song-list-item]').exists({ count: 1 }, 'The new song link is rendered');
     assert.dom('[data-test-rr=song-list-item]:first-child').hasText('American Idiot', 'The new song link is rendered as the first item');
   });
+
+  test('Sort songs in various ways', async function(assert) {
+    let band = this.server.create('band', { name: 'Hoobastank' });
+    this.server.create('song', { title: 'Same Direction', rating: 5, band });
+    this.server.create('song', { title: 'Crawling in the Dark', rating: 4, band });
+    this.server.create('song', { title: 'The Letter', rating: 3, band });
+    this.server.create('song', { title: 'Out of Control', rating: 5, band });
+
+    await visit('/');
+    await click('[data-test-rr=band-link]');
+
+    assert.dom('[data-test-rr=song-list-item]:first-child').hasText('Out of Control', 'The first song is the hightest ranked, first one in the alphabet');
+    assert.dom('[data-test-rr=song-list-item]:last-child').hasText('The Letter', 'The last song is the lowest ranked, last one in the alphabet');
+  });
 });

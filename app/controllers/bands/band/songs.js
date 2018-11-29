@@ -24,7 +24,7 @@ export default Controller.extend({
       let newSong = this.get('store').createRecord('song', {
         title: this.get('newSongName'),
         // связь с группой
-        band: this.model
+        band: this.get('model')
       });
       // POST-запрос
       await newSong.save();
