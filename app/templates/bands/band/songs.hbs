@@ -11,38 +11,38 @@
     </button>
   </div>
   <div class="rr-song-panel">
-    <button
-      class="rr-sort-button"
+    {{#link-to 
+      (query-params sort="ratingDesc") 
+      class="rr-sort-button" 
       data-test-rr="sort-by-rating-desc"
-      onclick={{action (mut sortBy) "ratingDesc"}}
-    >
+    }}
       Rating
       {{fa-icon "angle-down"}}
-    </button>
-    <button 
+    {{/link-to}}
+    {{#link-to 
+      (query-params sort="ratingAsc") 
       class="rr-sort-button" 
       data-test-rr="sort-by-rating-asc"
-      onclick={{action (mut sortBy) "ratingAsc"}}
-    >
+    }}
       Rating
       {{fa-icon "angle-up"}}
-    </button>
-    <button
-      class="rr-sort-button"
+    {{/link-to}}
+    {{#link-to 
+      (query-params sort="titleDesc") 
+      class="rr-sort-button" 
       data-test-rr="sort-by-title-desc"
-      onclick={{action (mut sortBy) "titleDesc"}}
-    >
+    }}
       Title
       {{fa-icon "angle-down"}}
-    </button>
-    <button
-      class="rr-sort-button"
+    {{/link-to}}
+    {{#link-to 
+      (query-params sort="titleAsc") 
+      class="rr-sort-button" 
       data-test-rr="sort-by-title-asc"
-      onclick={{action (mut sortBy) "titleAsc"}}
-    >
+    }}
       Title
       {{fa-icon "angle-up"}}
-    </button>
+    {{/link-to}}
   </div>
 </div>
 <ul class="rr-list">
