@@ -3,6 +3,12 @@ import { empty, sort } from '@ember/object/computed';
 import { computed } from '@ember/object';
 
 export default Controller.extend({
+  // параметры запроса
+  queryParams: {
+    sortBy: 'sort',
+    searchTerm: 's'
+  },
+
   isAddingSong: false,
   newSongName: '',
   isAddButtonDisabled: empty('newSongName'),

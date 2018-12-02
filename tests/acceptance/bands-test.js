@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { visit, click, fillIn } from '@ember/test-helpers';
+import { visit, click, fillIn, currentURL } from '@ember/test-helpers';
 import { createBand, createSong } from 'rarwe/tests/helpers/custom-helpers'
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
@@ -54,12 +54,24 @@ module('Acceptance | Bands', function(hooks) {
 
     await visit('/');
     await click('[data-test-rr=band-link]');
+
+    assert.equal(currentURL(), '/bands/1/songs');
     assert.dom('[data-test-rr=song-list-item]:first-child').hasText('Out of Control', 'The first song is the hightest ranked, first one in the alphabet');
     assert.dom('[data-test-rr=song-list-item]:last-of-type').hasText('The Letter', 'The last song is the lowest ranked, last one in the alphabet');
 
     await click('[data-test-rr=sort-by-title-desc]');
+
+    assert.equal(currentURL(), '/bands/1/songs?sort=titleDesc');
     assert.dom('[data-test-rr=song-list-item]:first-child').hasText('The Letter', 'the first song is the one that comes last in the alphabet');
     assert.dom('[data-test-rr=song-list-item]:last-of-type').hasText('Crawling in the Dark', 'the first song is the one that comes first in the alphabet');
+
+    await click('[data-test-rr=sort-by-title-asc]');
+
+    assert.equal(currentURL(), '/bands/1/songs?sort=titleAsc');
+
+    await click('[data-test-rr=sort-by-rating-asc]');
+
+    assert.equal(currentURL(), '/bands/1/songs?sort=ratingAsc');
   });
 
   test('Search songs ', async function(assert) {
@@ -74,10 +86,13 @@ module('Acceptance | Bands', function(hooks) {
     await click('[data-test-rr=band-link]');
     await fillIn('[data-test-rr=search-box]', 'no');
 
+    assert.equal(currentURL(), '/bands/1/songs?s=no');
     assert.dom('[data-test-rr=song-list-item]').exists({ count: 2 }, 'The songs matching the search term are displayed');
 
     await click('[data-test-rr=sort-by-title-desc]');
     
+    assert.ok(currentURL().includes('s=no'));
+    assert.ok(currentURL().includes('sort=titleDesc'));
     assert.dom('[data-test-rr=song-list-item]:first-child').hasText('No One Loves Me & Neither Do I', 'A matching song that comes later in the alphabet appears on top');
     assert.dom('[data-test-rr=song-list-item]:last-of-type').hasText('Mind Eraser, No Chaser', 'A matching song that comes sooner in the alphabet appears at the bottom');
   });
