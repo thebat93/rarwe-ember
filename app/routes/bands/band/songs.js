@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+// import wait from 'rarwe/utils/wait';
 
 export default Route.extend({
     // хук, который вызывается когда происходит выход из роута или меняется модель
@@ -12,6 +13,11 @@ export default Route.extend({
     model() {
         return this.modelFor('bands.band');
     },
+
+    // async model() {
+    //     await wait(3000);
+    //     return this.modelFor('bands.band');
+    // },
 
     actions: {
         // экшен, который срабатывает когда переход закончен
