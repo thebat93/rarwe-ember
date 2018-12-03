@@ -3,6 +3,12 @@ import { empty, sort } from '@ember/object/computed';
 import { computed } from '@ember/object';
 
 export default Controller.extend({
+  // параметры запроса
+  queryParams: {
+    sortBy: 'sort',
+    searchTerm: 's'
+  },
+
   isAddingSong: false,
   newSongName: '',
   isAddButtonDisabled: empty('newSongName'),
@@ -21,7 +27,18 @@ export default Controller.extend({
   }),
 
   // вычисляемое свойство: отсортированные песни
-  sortedSongs: sort('model.songs', 'sortProperties'),
+  sortedSongs: sort('matchingSongs', 'sortProperties'),
+
+  // значение, введенное в строку поиска
+  searchTerm: '',
+
+  // песни, которые подошли под поисковый запрос
+  matchingSongs: computed('model.songs.@each.title', 'searchTerm', function() {
+    let searchTerm = this.searchTerm.toLowerCase();
+    return this.model.get('songs').filter((song) => {
+      return song.title.toLowerCase().includes(searchTerm);
+    });
+  }),
 
   actions: {
     // добавить новую песню

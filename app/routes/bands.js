@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+// import wait from 'rarwe/utils/wait';
 
 export default Route.extend({
     model() {
@@ -11,6 +12,12 @@ export default Route.extend({
     // return A([ledZeppelin, pearlJam, fooFighters]);
         return this.store.findAll('band');
     },
+
+    // async model() {
+    //     // искусственная задержка для симуляции долгой загрузки
+    //     await wait(3000);
+    //     return this.store.findAll('band');
+    // },
     
     actions: {
         // экшен, который срабатывает когда переход закончен
