@@ -48,22 +48,22 @@ module('Acceptance | Bands', function(hooks) {
   test('Sort songs in various ways', async function(assert) {
     let band = this.server.create('band', { name: 'Hoobastank' });
     this.server.create('song', { title: 'Same Direction', rating: 5, band });
-    this.server.create('song', { title: 'Crawling in the Dark', rating: 4, band });
+    this.server.create('song', { title: 'Crawling In The Dark', rating: 4, band });
     this.server.create('song', { title: 'The Letter', rating: 3, band });
-    this.server.create('song', { title: 'Out of Control', rating: 5, band });
+    this.server.create('song', { title: 'Out Of Control', rating: 5, band });
 
     await visit('/');
     await click('[data-test-rr=band-link]');
 
     assert.equal(currentURL(), '/bands/1/songs');
-    assert.dom('[data-test-rr=song-list-item]:first-child').hasText('Out of Control', 'The first song is the hightest ranked, first one in the alphabet');
+    assert.dom('[data-test-rr=song-list-item]:first-child').hasText('Out Of Control', 'The first song is the hightest ranked, first one in the alphabet');
     assert.dom('[data-test-rr=song-list-item]:last-of-type').hasText('The Letter', 'The last song is the lowest ranked, last one in the alphabet');
 
     await click('[data-test-rr=sort-by-title-desc]');
 
     assert.equal(currentURL(), '/bands/1/songs?sort=titleDesc');
     assert.dom('[data-test-rr=song-list-item]:first-child').hasText('The Letter', 'the first song is the one that comes last in the alphabet');
-    assert.dom('[data-test-rr=song-list-item]:last-of-type').hasText('Crawling in the Dark', 'the first song is the one that comes first in the alphabet');
+    assert.dom('[data-test-rr=song-list-item]:last-of-type').hasText('Crawling In The Dark', 'the first song is the one that comes first in the alphabet');
 
     await click('[data-test-rr=sort-by-title-asc]');
 

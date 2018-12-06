@@ -48,7 +48,7 @@
 <ul class="rr-list">
   {{#each sortedSongs as |song|}}
     <li class="rr-list-item" data-test-rr="song-list-item">
-      {{song.title}}
+      {{capitalize song.title}}
       {{star-rating
         class="fr"
         rating=song.rating
@@ -57,7 +57,7 @@
     </li>
   {{else}}
     <li class="rr-empty-message">
-      No {{model.name}} songs yet, why don't you <a href="#" onclick={{action "addSong"}}>create one?</a>
+      No {{capitalize model.name}} songs yet, why don't you <a href="#" onclick={{action "addSong"}}>create one?</a>
     </li>
   {{/each}}
   <div class="rr-new-label">
@@ -71,7 +71,7 @@
           type="text" 
           class="rr-input" 
           value=newSongName 
-          placeholder="New Song" 
+          placeholder=newSongPlaceholder
           data-test-rr="new-song-input"
         }}
         <div class="rr-inline-form-group ml-auto">

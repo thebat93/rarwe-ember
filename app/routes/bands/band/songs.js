@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import { capitalize } from 'rarwe/helpers/capitalize';
 // import wait from 'rarwe/utils/wait';
 
 export default Route.extend({
@@ -23,7 +24,8 @@ export default Route.extend({
         // экшен, который срабатывает когда переход закончен
         didTransition() {
             let band = this.modelFor('bands.band');
-            document.title = `${band.name} - Rock & Roll`;
+            let name = capitalize(band.name);
+            document.title = `${name} - Rock & Roll`;
         }
     }
 });
