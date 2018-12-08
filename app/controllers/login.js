@@ -10,6 +10,8 @@ export default Controller.extend({
       let { email, password } = this;
 
       //TODO: authenticate the user against the backend
+      // используем метод аутентификации
+      await this.get('session').authenticate('authenticator:credentials', email, password);
       await this.transitionToRoute('bands');
     }
   }
