@@ -16,7 +16,7 @@
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
-    "start:proxy": "ember serve --proxy=http://json-api.rockandrollwithemberjs.com"
+    "start:proxy": "ember serve --proxy=https://auth-api.rockandrollwithemberjs.com"
   },
   "devDependencies": {
     "@ember/jquery": "^0.5.2",
