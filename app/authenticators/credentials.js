@@ -19,7 +19,9 @@ export default Base.extend({
         password
       })
     });
+
     let { user_email: userEmail, token } = response;
+
     return { userEmail, token };
   },
 

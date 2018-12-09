@@ -5,6 +5,7 @@ export default Controller.extend({
       // зарегистрироваться
       async signUp(e) {
         e.preventDefault();
+
         let { email, password } = this;
         // создаем новую запись в сторе...
         let user = this.store.createRecord('user', { email, password });
