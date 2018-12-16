@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { visit, fillIn, click } from '@ember/test-helpers';
+import { visit, fillIn, click, triggerEvent } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
 
@@ -25,7 +25,7 @@ module('Acceptance | Sign up', function(hooks) {
 
     await fillIn('#password', 'crooked');
     await triggerEvent('#password', 'blur');
-    assert.dom('[data-test-rr=password-error]').hasText('Password should be at least 8 characters', 'Password error is displayed');
+    assert.dom('[data-test-rr=password-error]').hasText('Password should be at least 8 characters long', 'Password error is displayed');
 
     await fillIn('#email', 'dave@tcv.com');
     await triggerEvent('#email', 'blur');
