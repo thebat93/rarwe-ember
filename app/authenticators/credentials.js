@@ -4,9 +4,12 @@ import { inject as service } from '@ember/service';
 export default Base.extend({
   ajax: service(),
 
-  // restore(data) {
-  // },
+  // метод восстановления сессии
+  async restore(data) {
+    return data;
+  },
 
+  // метод аутентификации
   async authenticate(username, password) {
     // POST-запрос: прописываем хедеры и отправляем данные
     let response = await this.ajax.post('/token', {
