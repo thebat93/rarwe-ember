@@ -4,6 +4,6 @@ export default Route.extend({
     // хук "beforeModel()" выполняется до хука "model()"
     beforeModel() {
         // редирект на другой роут
-        this.transitionTo('login');
+        this.transitionTo('bands');
     }
 });

@@ -1,7 +1,11 @@
 import Route from '@ember/routing/route';
+import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 // import wait from 'rarwe/utils/wait';
 
-export default Route.extend({
+// расширяем от миксина: объявляем роут защищенным
+// все дочерние роуты тоже окажутся защищенными
+// по умолчанию редиректит на /login если пользователь не аутентифицирован
+export default Route.extend(AuthenticatedRouteMixin, {
     model() {
     // let pearlJam = Band.create({
     //     name: 'Pearl Jam',

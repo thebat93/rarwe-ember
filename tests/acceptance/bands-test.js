@@ -96,4 +96,11 @@ module('Acceptance | Bands', function(hooks) {
     assert.dom('[data-test-rr=song-list-item]:first-child').hasText('No One Loves Me & Neither Do I', 'A matching song that comes later in the alphabet appears on top');
     assert.dom('[data-test-rr=song-list-item]:last-of-type').hasText('Mind Eraser, No Chaser', 'A matching song that comes sooner in the alphabet appears at the bottom');
   });
+
+  test('Visiting landing page without signing in', async function(assert) {
+    await visit('/');
+
+    assert.dom('[data-test-rr=form-header]').hasText('Log in to R&R');
+    assert.dom('[data-test-rr=user-email]').doesNotExist();
+  });
 });
