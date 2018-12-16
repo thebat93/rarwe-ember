@@ -61,10 +61,10 @@ export default Controller.extend({
     async saveSong(e) {
       e.preventDefault();
       // создать новую запись в сторе
-      let newSong = this.get('store').createRecord('song', {
-        title: this.get('newSongName'),
+      let newSong = this.store.createRecord('song', {
+        title: this.newSongName,
         // связь с группой
-        band: this.get('model')
+        band: this.model
       });
       // POST-запрос
       await newSong.save();

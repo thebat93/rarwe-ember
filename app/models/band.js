@@ -21,7 +21,7 @@ export default Model.extend({
     description: attr('string'),
 
     isGreatBand: computed('songs.@each.rating', function() {
-        let goodSongs = this.get('songs').filter((song) => song.rating >= 4);
+        let goodSongs = this.songs.filter((song) => song.rating >= 4);
         return goodSongs.length >= 2;
     }),
 

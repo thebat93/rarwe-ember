@@ -11,7 +11,7 @@ export default Controller.extend({
 
       //TODO: authenticate the user against the backend
       // используем метод аутентификации
-      await this.get('session').authenticate('authenticator:credentials', email, password);
+      await this.session.authenticate('authenticator:credentials', email, password);
       await this.transitionToRoute('bands');
     }
   }
