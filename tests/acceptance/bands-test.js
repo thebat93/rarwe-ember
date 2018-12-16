@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { visit, click, fillIn, currentURL } from '@ember/test-helpers';
-import { createBand, createSong } from 'rarwe/tests/helpers/custom-helpers'
+import { createBand, createSong, loginAs } from 'rarwe/tests/helpers/custom-helpers'
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
 
@@ -12,6 +12,8 @@ module('Acceptance | Bands', function(hooks) {
     this.server.create('band', { name: 'Radiohead' });
     this.server.create('band', { name: 'Long Distance Calling' });
     
+    await loginAs('dave@tcv.com');
+
     await visit('/');
     
     assert.dom('[data-test-rr=band-link]').exists({ count: 2}, 'All band links are rendered');
@@ -22,6 +24,8 @@ module('Acceptance | Bands', function(hooks) {
   test('Create a band', async function(assert) {
     this.server.create('band', { name: 'Royal Blood' });
     
+    await loginAs('dave@tcv.com');
+
     await visit('/');
     await createBand('Caspian');
     
@@ -33,6 +37,8 @@ module('Acceptance | Bands', function(hooks) {
   test('Create a song', async function(assert) {
     this.server.create('band', { name: 'Green Day' });
     
+    await loginAs('dave@tcv.com');
+
     await visit('/');
     await click('[data-test-rr=band-link]:first-child');
 
@@ -51,6 +57,8 @@ module('Acceptance | Bands', function(hooks) {
     this.server.create('song', { title: 'Crawling In The Dark', rating: 4, band });
     this.server.create('song', { title: 'The Letter', rating: 3, band });
     this.server.create('song', { title: 'Out Of Control', rating: 5, band });
+
+    await loginAs('dave@tcv.com');
 
     await visit('/');
     await click('[data-test-rr=band-link]');
@@ -81,6 +89,8 @@ module('Acceptance | Bands', function(hooks) {
     this.server.create('song', { title: 'Mind Eraser, No Chaser', rating: 4, band });
     this.server.create('song', { title: 'Spinning in Daffodils', rating: 5, band });
     this.server.create('song', { title: 'No One Loves Me & Neither Do I', rating: 5, band });
+
+    await loginAs('dave@tcv.com');
 
     await visit('/');
     await click('[data-test-rr=band-link]');
