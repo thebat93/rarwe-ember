@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import extractServerError from 'rarwe/utils/extract-server-error';
 
 export default Controller.extend({
   // вычисляемое свойство для откладывания показа ошибок валидации
@@ -17,9 +18,15 @@ export default Controller.extend({
     async signUp(e) {
       e.preventDefault();
 
-      await this.model.save();
-      // переходим на страницу логина
-      await this.transitionToRoute('login');
+      // Обработка ошибок серверной валидации
+      try {
+        await this.model.save();
+        // переходим на страницу логина
+        await this.transitionToRoute('login');
+      } catch(response) {
+        let errorMessage = extractServerError(response.errors);
+        this.baseErrors.pushObject(errorMessage);
+      }
 
       // let { email, password } = this;
       // // создаем новую запись в сторе...
