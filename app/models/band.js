@@ -1,10 +1,21 @@
 import DS from 'ember-data';
 import { computed } from '@ember/object';
+import { buildValidations, validator } from 'ember-cp-validations';
 // import { dasherize } from '@ember/string'
 
 const { Model, attr, hasMany } = DS;
 
-export default Model.extend({
+const Validations = buildValidations({
+    description: [
+        validator('length', {
+            min: 12,
+            message: 'The description needs to be at least 12 characters long'
+        }),
+        validator('year-of-formation')
+    ]
+});
+
+export default Model.extend(Validations, {
     // name: '',
     // description: '',
 
