@@ -8,6 +8,15 @@
   </button>
   <h3>Description</h3>
   {{#if isEditing}}
+    {{#if showErrors.description}}
+      <div class="rr-form-field-error" data-test-rr="description-error">
+        {{v-get
+          model
+          "description"
+          "message"
+        }}
+      </div>
+    {{/if}}
     {{textarea class="rr-textarea" value=model.description}}
   {{else}}
     <p class="lh-copy">{{model.description}}</p>
