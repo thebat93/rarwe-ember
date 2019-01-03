@@ -10,7 +10,8 @@ export default Route.extend({
   resetController(controller, isExiting) {
     if (isExiting) {
       controller.setProperties({
-        isEditing: false
+        isEditing: false,
+        showErrors: { description: false }
       });
     }
   },

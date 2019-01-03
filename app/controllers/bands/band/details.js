@@ -4,21 +4,21 @@ import { computed } from '@ember/object';
 export default Controller.extend({
   isEditing: false,
 
+  showErrors: computed('_showErrors', {
+    get() {
+      return this._showErrors || { description: false };
+    },
+    set(key, value) {
+      this.set('_showErrors', value);
+      return this._showErrors;
+    }
+  }),
+
   actions: {
     // переключить флаг редактирования
     edit() {
       this.set('isEditing', true);
     },
-  
-    showErrors: computed('_showErrors', {
-      get() {
-        return this._showErrors || { description: false };
-      },
-      set(key, value) {
-        this.set('_showErrors', value);
-        return this._showErrors;
-      }
-    }),
 
     // обновить (сохранить) описание
     async save() {
