@@ -1,5 +1,6 @@
 import Base from 'ember-simple-auth/authenticators/base';
 import { inject as service } from '@ember/service';
+import ENV from 'rarwe/config/environment';
 
 export default Base.extend({
   ajax: service(),
@@ -12,7 +13,8 @@ export default Base.extend({
   // метод аутентификации
   async authenticate(username, password) {
     // POST-запрос: прописываем хедеры и отправляем данные
-    let response = await this.ajax.post('/token', {
+    let tokenURL = ENV.apiHost ? `${ENV.apiHost}/token` : '/token';
+    let response = await this.ajax.post(tokenURL, {
       headers: {
         'Accept': 'application/vnd.api+json',
         'Content-Type': 'application/vnd.api+json'
