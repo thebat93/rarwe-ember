@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { visit, click, fillIn, currentURL } from '@ember/test-helpers';
+import { visit, click, fillIn, currentURL, find } from '@ember/test-helpers';
 import { createBand, createSong, loginAs } from 'rarwe/tests/helpers/custom-helpers'
 import { setupApplicationTest } from 'ember-qunit';
 import setupMirageTest from 'ember-cli-mirage/test-support/setup-mirage';
@@ -72,17 +72,20 @@ module('Acceptance | Bands', function(hooks) {
     assert.dom('[data-test-rr=song-list-item]:first-child').hasText('Out Of Control', 'The first song is the hightest ranked, first one in the alphabet');
     assert.dom('[data-test-rr=song-list-item]:last-of-type').hasText('The Letter', 'The last song is the lowest ranked, last one in the alphabet');
 
-    await click('[data-test-rr=sort-by-title-desc]');
+    const titleDescOption = find('[data-test-rr=sort-by-title-desc]').value;
+    await fillIn('[data-test-rr=sort-selector]', titleDescOption);
 
     assert.equal(currentURL(), '/bands/1/songs?sort=titleDesc');
     assert.dom('[data-test-rr=song-list-item]:first-child').hasText('The Letter', 'the first song is the one that comes last in the alphabet');
     assert.dom('[data-test-rr=song-list-item]:last-of-type').hasText('Crawling In The Dark', 'the first song is the one that comes first in the alphabet');
 
-    await click('[data-test-rr=sort-by-title-asc]');
+    const titleAscOption = find('[data-test-rr=sort-by-title-asc]').value;
+    await fillIn('[data-test-rr=sort-selector]', titleAscOption);
 
     assert.equal(currentURL(), '/bands/1/songs?sort=titleAsc');
 
-    await click('[data-test-rr=sort-by-rating-asc]');
+    const ratingAscOption = find('[data-test-rr=sort-by-rating-asc]').value;
+    await fillIn('[data-test-rr=sort-selector]', ratingAscOption);
 
     assert.equal(currentURL(), '/bands/1/songs?sort=ratingAsc');
   });
@@ -104,7 +107,8 @@ module('Acceptance | Bands', function(hooks) {
     assert.equal(currentURL(), '/bands/1/songs?s=no');
     assert.dom('[data-test-rr=song-list-item]').exists({ count: 2 }, 'The songs matching the search term are displayed');
 
-    await click('[data-test-rr=sort-by-title-desc]');
+    const titleDescOption = find('[data-test-rr=sort-by-title-desc]').value;
+    await fillIn('[data-test-rr=sort-selector]', titleDescOption);
     
     assert.ok(currentURL().includes('s=no'));
     assert.ok(currentURL().includes('sort=titleDesc'));
